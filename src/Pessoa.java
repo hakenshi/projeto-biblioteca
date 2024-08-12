@@ -6,14 +6,10 @@ public class Pessoa {
     private Telefone telefone;
     private ArrayList<Livro> livros;
 
-    public Pessoa(String nome, String dataNascimento, Telefone telefone) {
+    public Pessoa(String nome, String data){
         this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.telefone = telefone;
-        this.livros = new ArrayList<>();
+        this.dataNascimento = data;
     }
-
-    public Pessoa(){}
 
     public String getNome() {
         return nome;
@@ -36,8 +32,7 @@ public class Pessoa {
     }
 
     public void setTelefone(String ddd, String numero) {
-        telefone.setDdd(ddd);
-        telefone.setNumero(numero);
+        telefone = new Telefone(ddd, numero);
     }
 
     public ArrayList<Livro> getLivros() {
@@ -69,9 +64,29 @@ public class Pessoa {
         }
     }
 
-    public void retirarLitro(Livro livro){
+    public void devolverLivro(Livro livroDevolvido){
+        if(livroDevolvido != null && !livros.isEmpty()){
+
+            Livro livroParaRemover = null;
+
+            for(Livro livro : livros){
+                if(livro.getIsbn().equals(livroDevolvido.getIsbn())){
+                    livroParaRemover = livro;
+                    break;
+                }
+            }
+            if(livroParaRemover != null){
+                livros.remove(livroParaRemover);
+                livroDevolvido.devolverLivro();
+            }
+
+        }
+    }
+
+    public void retirarLivro(Livro livro){
         if(livro != null){
-            System.out.println("Livro retirado: ");
+            addLivro(livro);
+            livro.setPessoa(this);
         }
     }
 

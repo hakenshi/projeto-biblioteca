@@ -3,6 +3,8 @@ public class Livro {
     private String editora;
     private String isbn;
 
+    private Pessoa pessoa;
+
     public Livro(String nome, String editora, String isbn) {
         this.nome = nome;
         this.editora = editora;
@@ -36,5 +38,19 @@ public class Livro {
 
     public void mostrar(){
         System.out.printf("Nome: %s\nEditora: %s\nISBN: %s\n", nome, editora, isbn);
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+    }
+
+    public void devolverLivro() {
+        setPessoa(null);
+    }
+
+    public void cumQueinIsta(){
+        if(pessoa != null){
+            System.out.printf("O livro %s está com %s", nome, pessoa.getNome());
+        }
+        else System.out.printf("O livro %s está indisponível para retirada.", nome);
     }
 }
